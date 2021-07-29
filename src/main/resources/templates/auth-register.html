@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Register - SB Admin Pro</title>
+<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--    &lt;!&ndash;&#45;&#45;&#45;&#45; Include the above in your HEAD tag &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>-->
+
+    <!-- Latest compiled and minified CSS -->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">-->
+
+<!--    &lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>-->
+
+<!--    &lt;!&ndash; (Optional) Latest compiled and minified JavaScript translation files &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
+
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+<!--&lt;!&ndash;    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />&ndash;&gt;-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />-->
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" th:href="@{assets/img/favicon.png}"/>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+    <script data-search-pseudo-elements="" defer=""
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--    <script>-->
+<!--        $("#myform").submit(function( event ) {-->
+<!--            $("#mySubmitButton").prop("disabled", true).addClass("disabled");-->
+<!--        });-->
+<!--    </script>-->
+</head>
+<body class="nav-fixed">
+<div th:replace="fragments-menu.html :: top_nav"></div>
+<div id="layoutSidenav">
+    <div th:replace="fragments-menu.html :: side_nav"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-xl px-4 mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-xxl-10 col-xl-10 col-lg-8 mb-4">
+                        <!-- Basic registration form-->
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header justify-content-center"><h3 class="fw-light my-4">Create
+                                Account</h3></div>
+                            <div class="card-body">
+                                <!-- Registration form-->
+                                <form id="myform" action="#" th:action="@{/register}" th:object="${operator}" method="post">
+                                    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                                    </div>
+                                    <div class="alert alert-green" th:if="${output!=null}">
+                                        Adding Successfully Operator Id : <span th:text="${output}"></span>
+                                    </div>
+                                    <!-- Form Row-->
+<!--                                    <input type="hidden" id="inputId" th:field="*{id}"/>-->
+                                    <div class="row gx-3">
+                                        <div class="col-md-6">
+                                            <!-- Form Group (first name)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputFirstName">First Name</label>
+                                                <input class="form-control" id="inputFirstName" type="text" th:field="*{firstName}"
+                                                       placeholder="Enter first name"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- Form Group (last name)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputLastName">Last Name</label>
+                                                <input class="form-control" id="inputLastName" type="text" th:field="*{lastName}"
+                                                       placeholder="Enter last name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form Group (email address)            -->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="inputEmailAddress">Email</label>
+                                        <input class="form-control" id="inputEmailAddress" type="email" th:field="*{email}"
+                                               aria-describedby="emailHelp" placeholder="Enter email address"/>
+                                    </div>
+<!--                                    <div class="mb-3" >-->
+<!--&lt;!&ndash;                                    <div class="container my-4" >&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <label class="small mb-1" for="selected">Select</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <select id="selected" class="mdb-select md-form" searchable="Search here..">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="" disabled selected>Choose your country</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="1">USA</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="2">Germany</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="3">France</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="3">Poland</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <option value="3">Japan</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </select>&ndash;&gt;-->
+<!--                                        <select class="selectpicker" data-live-search="true">-->
+<!--                                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>-->
+<!--                                            <option data-tokens="mustard">Burger, Shake and a Smile</option>-->
+<!--                                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-xs-12">-->
+<!--                                            <div class="box">-->
+<!--                                                &lt;!&ndash; /.box-header &ndash;&gt;-->
+<!--                                                <div class="box-body">-->
+<!--                                                    <form>-->
+<!--                                                        <div class="form-group row">-->
+<!--                                                            <label for="" class="col-sm-2 form-control-label">Country</label>-->
+<!--                                                            <div class="col-sm-10">-->
+<!--                                                                <select class="form-control selectpicker" id="select-country" data-live-search="true">-->
+<!--                                                                    <option data-tokens="china">China</option>-->
+<!--                                                                    <option data-tokens="malayasia">Malayasia</option>-->
+<!--                                                                    <option data-tokens="singapore">Singapore</option>-->
+<!--                                                                </select>-->
+
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </form>-->
+<!--                                                </div>-->
+<!--                                                &lt;!&ndash; /.box-body &ndash;&gt;-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; /.box &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; /.col &ndash;&gt;-->
+<!--                                    </div>-->
+                                    <!-- /.row -->
+<!--                                    <div class="container">-->
+<!--                                        <div class="row">-->
+<!--                                            <form class="col-md-4">-->
+<!--                                                <label>Select</label>-->
+<!--                                                <select class="form-control select2">-->
+<!--                                                    <option>Select</option>-->
+<!--                                                    <option>Car</option>-->
+<!--                                                    <option>Bike</option>-->
+<!--                                                    <option>Scooter</option>-->
+<!--                                                    <option>Cycle</option>-->
+<!--                                                    <option>Horse</option>-->
+<!--                                                </select>-->
+<!--                                            </form>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <!-- Form Row    -->
+                                    <div class="row gx-3">
+                                        <div class="col-md-6">
+                                            <!-- Form Group (password)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputPassword">Password</label>
+                                                <input class="form-control" id="inputPassword" type="password" th:field="*{password}"
+                                                       placeholder="Enter password"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- Form Group (confirm password)-->
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="inputConfirmPassword">Confirm
+                                                    Password</label>
+                                                <input class="form-control" id="inputConfirmPassword" type="password" th:field="*{confirmPassword}"
+                                                       placeholder="Confirm password"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form Group (create account submit)-->
+<!--                                    <a class="btn btn-primary btn-block" href="auth-login-basic.html">Create Account</a>-->
+                                    <!-- Form Group (login box)-->
+                                    <div class="text-center align-items-center justify-content-between mt-4 mb-0">
+<!--                                        <a class="small" href="auth-forgot-password.html">Forgot Password?</a>-->
+                                        <!--                                            <a class="btn btn-primary" href="dashboard.html">Login</a>-->
+                                        <button id="mySubmitButton" type="submit" class="btn btn-primary float-right">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="small"><a href="auth-login-basic.html">Have an account? Go to login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script th:src="@{js/scripts.js}"></script>
+<!--<script>-->
+<!--    $("#myform").submit(function( event ) {-->
+<!--        $("#mySubmitButton").prop("disabled", true).addClass("disabled");-->
+<!--    });-->
+<!--</script>-->
+<script>
+    $(document).ready(function () {
+        $("#myform").submit(function (e) {
+            //stop submitting the form to see the disabled button effect
+            // e.preventDefault();
+
+            //disable the submit button
+            $("#mySubmitButton").attr("disabled", true);
+
+            //disable a normal button
+<!--            $("#btnTest").attr("disabled", true);-->
+
+            return true;
+
+        });
+    });
+</script>
+<!--<script th:src="@{/assets.startbootstrap.com/js/sb-customizer.js}"></script>-->
+<!--        <sb-customizer project="sb-admin-pro"></sb-customizer>-->
+<!--    <script defer src="../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"65f75453aaf65fdc","token":"6e2c2575ac8f44ed824cef7899ba8463","version":"2021.5.2","si":10}'></script>-->
+</body>
+
+<!-- Mirrored from sb-admin-pro.startbootstrap.com/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 14 Jun 2021 23:28:03 GMT -->
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Fragment #1 : Header files contains css and js references -->
+<!--<head th:fragment="headerfiles">-->
+<!--    <title>Introduction to SpringBoot Security</title>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <link th:href="@{/bootstrap.min.css}" rel="stylesheet">-->
+<!--    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">-->
+<!--</head>-->
+
+<head th:fragment="headerfiles">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+    <link th:href="@{css/styles.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" th:href="@{assets/img/favicon.png}"/>
+    <script data-search-pseudo-elements="" defer=""
+            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<nav th:fragment="top_nav"
+     class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white"
+     id="sidenavAccordion">
+    <!-- Sidenav Toggle Button-->
+    <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i
+            data-feather="menu"></i></button>
+    <!-- Navbar Brand-->
+    <!-- * * Tip * * You can use text or an image for your navbar brand.-->
+    <!-- * * * * * * When using an image, we recommend the SVG format.-->
+    <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="#" th:href="@{/index}">SB Admin Pro</a>
+    <!-- Navbar Items-->
+    <ul class="navbar-nav align-items-center ms-auto">
+        <!-- User Dropdown-->
+        <li sec:authorize="isAuthenticated()" class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
+            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
+               href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false"><img class="img-fluid"
+                                          src="assets/img/illustrations/profiles/profile-1.png"/></a>
+            <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
+                 aria-labelledby="navbarDropdownUserImage">
+                <h6 class="dropdown-header d-flex align-items-center">
+                    <img class="dropdown-user-img" src="assets/img/illustrations/profiles/profile-1.png"/>
+                    <div class="dropdown-user-details">
+                        <div class="dropdown-user-details-name"><span sec:authentication="principal.fullName"></span></div>
+                        <div class="dropdown-user-details-email"><span sec:authentication="principal.username"></span>
+                        </div>
+                    </div>
+                </h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="account-profile.html">
+                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+                    Account
+                </a>
+                <a class="dropdown-item">
+                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+                    <form form-method="post" th:action="@{/logout}">
+                        <input class="btn" type="submit" value="logout" sec:authorize="isAuthenticated()"
+                               style="padding-top:5px;padding-bottom:5px;padding-left:5px;margin-bottom:5px;"/>
+                    </form>
+                </a>
+
+
+            </div>
+        </li>
+    </ul>
+</nav>
+<!--th:fragment="side_nav(value,show)"-->
+<div th:fragment="side_nav" id="layoutSidenav_nav">
+    <nav class="sidenav shadow-right sidenav-light">
+        <div class="sidenav-menu">
+            <div class="nav accordion" id="accordionSidenav">
+                <!-- Sidenav Menu Heading (Core)-->
+                <div class="sidenav-menu-heading">Core</div>
+                <!-- Sidenav Accordion (Dashboard)-->
+                <!--                a class="nav-link active"-->
+<!--                th:text="${value=='dashboard'}" -->
+<!--                th:classappend="${value=='dashboard'}?active:''"-->
+                <a class="nav-link collapsed"  href="javascript:void(0);" th:href="@{/index}">
+                    <div class="nav-link-icon"><i data-feather="activity"></i></div>
+                    Dashboards
+                </a>
+                <!-- Sidenav Heading (App Views)-->
+                <div class="sidenav-menu-heading">App Views</div>
+                <!-- Sidenav Accordion (Pages)-->
+                <a class="nav-link" href="javascript:void(0);" data-bs-toggle="collapse"
+                   data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                    <div class="nav-link-icon"><i data-feather="grid"></i></div>
+                    Pages
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse show" id="collapsePages" data-bs-parent="#accordionSidenav">
+                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
+                        <!-- Nested Sidenav Accordion (Pages -> Account)-->
+<!--                        th:classappend="${value=='profile'}?active:''"-->
+                        <a class="nav-link collapsed"  href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseAccount" aria-expanded="false"
+                           aria-controls="pagesCollapseAccount">
+                            Account
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+<!--                        th:classappend="${show}"-->
+                        <div class="collapse"  id="pagesCollapseAccount"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+<!--                                th:classappend="${value=='profile'}?active:''"-->
+                                <a class="nav-link"  th:href="@{/profile}">Profile</a>
+                                <a class="nav-link" th:href="@{/setting}">Security</a>
+                            </nav>
+                        </div>
+
+                        <!-- Nested Sidenav Accordion (Pages -> Provider)-->
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseProvider" aria-expanded="false"
+                           aria-controls="pagesCollapseProvider">Provider
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseProvider"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" th:href="@{provider}">Add Provider</a>
+                                <a class="nav-link" th:href="@{providers}">Provider List</a>
+                            </nav>
+                        </div>
+
+
+                        <!-- Nested Sidenav Accordion (Pages -> Insurance)-->
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseInsurance" aria-expanded="false"
+                           aria-controls="pagesCollapseInsurance">Insurance Company
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseInsurance"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" th:href="@{insurance-company}">Add Insurance Company</a>
+                                <a class="nav-link" th:href="@{insurance-companys}">Insurance List</a>
+                            </nav>
+                        </div>
+
+
+                        <!-- Nested Sidenav Accordion (Pages -> Patient)-->
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapsePatient" aria-expanded="false"
+                           aria-controls="pagesCollapsePatient">Patient
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapsePatient"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" th:href="@{patient}">Add Patient</a>
+                                <a class="nav-link" th:href="@{patients}">Patient List</a>
+                            </nav>
+                        </div>
+
+                        <!-- Nested Sidenav Accordion (Pages -> Patient)-->
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                           aria-controls="pagesCollapseAuth">
+                            Authentication
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseAuth"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" th:href="@{login}">Login</a>
+                                <a class="nav-link" th:href="@{register}">Register</a>
+                                <a class="nav-link" th:href="@{forgetPassword}">Forgot Password</a>
+                            </nav>
+                        </div>
+
+
+                        <!-- Nested Sidenav Accordion (Pages -> Error)-->
+                        <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseError" aria-expanded="false"
+                           aria-controls="pagesCollapseError">
+                            Error
+                            <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseError"
+                             data-bs-parent="#accordionSidenavPagesMenu">
+                            <nav class="sidenav-menu-nested nav">
+                                <a class="nav-link" href="error-400.html">400 Error</a>
+                                <a class="nav-link" href="error-401.html">401 Error</a>
+                                <a class="nav-link" href="error-403.html">403 Error</a>
+                                <a class="nav-link" href="error-404-1.html">404 Error 1</a>
+                                <a class="nav-link" href="error-404-2.html">404 Error 2</a>
+                                <a class="nav-link" href="error-500.html">500 Error</a>
+                                <a class="nav-link" href="error-503.html">503 Error</a>
+                                <a class="nav-link" href="error-504.html">504 Error</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                        <a class="nav-link" href="invoice.html">Invoice</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Sidenav Footer-->
+        <div class="sidenav-footer">
+            <div class="sidenav-footer-content">
+                <div class="sidenav-footer-subtitle">Logged in as:</div>
+                <div class="sidenav-footer-title"><span sec:authentication="principal.fullName"></span></div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<!-- Fragment #2 : Navbar contains nav links -->
+<!--<div th:fragment="nav">-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--        <a class="navbar-brand" href="#">Boot Security</a>-->
+
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--            <ul class="navbar-nav mr-auto">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/index}"><i class="fa fa-home"></i>Home</a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="isAuthenticated()" class="nav-item">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/profile/index}">Profile</a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/admin/index}">Admin</a>-->
+<!--                </li>-->
+<!--                <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')" class="nav-item">-->
+<!--                    <a class="nav-link" href="#" th:href="@{/management/index}">Management</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">-->
+<!--                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>-->
+<!--                <button sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--</div>-->
+</body>
+</html>

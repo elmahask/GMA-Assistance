@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - SB Admin Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+    <link th:href="@{assets/img/favicon.png}" rel="icon" type="image/x-icon" />
+    <script data-search-pseudo-elements="" defer="" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="nav-fixed">
+<div th:replace="fragments-menu.html :: top_nav"></div>
+<div id="layoutSidenav">
+    <div th:replace="fragments-menu.html :: side_nav"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                    <div class="container-xl px-4">
+                        <div class="page-header-content">
+                            <div class="row align-items-center justify-content-between pt-3">
+                                <div class="col-auto mb-3">
+                                    <h1 class="page-header-title">
+                                        <div class="page-header-icon"><i data-feather="user"></i></div>
+                                        Insurance Company
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- Main page content-->
+                <div class="container-xl px-4 mt-4">
+                    <!-- Wizard card example with navigation-->
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <!-- Wizard navigation-->
+                            <div class="nav nav-pills nav-justified flex-column flex-xl-row nav-wizard" id="cardTab"
+                                 role="tablist">
+                                <!-- Wizard navigation item 1-->
+                                <a class="nav-item nav-link active" id="wizard1-tab" href="#wizard1"
+                                   data-bs-toggle="tab" role="tab" aria-controls="wizard1" aria-selected="true">
+                                    <div class="wizard-step-icon">※</div>
+                                    <div class="wizard-step-text">
+                                        <div class="wizard-step-text-name">Insurance Company</div>
+                                        <div class="wizard-step-text-details">Add Basic details and information</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="cardTabContent">
+                                <!-- Wizard tab pane item 1-->
+                                <div class="tab-pane py-xl-6 fade show active" id="wizard1" role="tabpanel"
+                                     aria-labelledby="wizard1-tab">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xxl-6 col-xl-8">
+                                            <h3 class="text-primary">Add new Insurance Company</h3>
+                                            <!-- <h5 class="card-title mb-4">Enter your account information</h5> -->
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="inputUsername">Username (how your
+                                                        name will appear to other users on the site)</label>
+                                                    <input class="form-control" id="inputUsername" type="text"
+                                                           placeholder="Enter your username" value="username" />
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="small mb-1" for="inputFirstName">First
+                                                            name</label>
+                                                        <input class="form-control" id="inputFirstName" type="text"
+                                                               placeholder="Enter your first name" value="Valerie" />
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="small mb-1" for="inputLastName">Last name</label>
+                                                        <input class="form-control" id="inputLastName" type="text"
+                                                               placeholder="Enter your last name" value="Luna" />
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="small mb-1" for="inputOrgName">Organization
+                                                            name</label>
+                                                        <input class="form-control" id="inputOrgName" type="text"
+                                                               placeholder="Enter your organization name"
+                                                               value="Start Bootstrap" />
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="small mb-1" for="inputLocation">Location</label>
+                                                        <input class="form-control" id="inputLocation" type="text"
+                                                               placeholder="Enter your location"
+                                                               value="San Francisco, CA" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="inputEmailAddress">Email
+                                                        address</label>
+                                                    <input class="form-control" id="inputEmailAddress" type="email"
+                                                           placeholder="Enter your email address"
+                                                           value="name@example.com" />
+                                                </div>
+                                                <div class="row gx-3">
+                                                    <div class="col-md-6 mb-md-0">
+                                                        <label class="small mb-1" for="inputPhone">Phone number</label>
+                                                        <input class="form-control" id="inputPhone" type="tel"
+                                                               placeholder="Enter your phone number"
+                                                               value="555-123-4567" />
+                                                    </div>
+                                                    <div class="col-md-6 mb-0">
+                                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                                        <input class="form-control" id="inputBirthday" type="text"
+                                                               name="birthday" placeholder="Enter your birthday"
+                                                               value="06/10/1988" />
+                                                    </div>
+                                                </div>
+                                                <hr class="my-4" />
+                                                <div class="d-flex justify-content-between">
+                                                    <button class="btn btn-primary" type="button">Next</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer-admin mt-auto footer-light">
+                <div class="container-xl px-4">
+                    <div class="row">
+                        <div class="col-md-6 small">Copyright © Your Website 2021</div>
+                        <div class="col-md-6 text-md-end small">
+                            <a href="#!">Privacy Policy</a>
+                            ·
+                            <a href="#!">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script data-cfasync="false" th:src="@{/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script th:src="@{js/scripts.js}"></script>
+    <script src="https://assets.startbootstrap.com/js/sb-customizer.js"></script>
+    <!-- <sb-customizer project="sb-admin-pro"></sb-customizer> -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"rayId":"6602815c8ece0fd2","token":"6e2c2575ac8f44ed824cef7899ba8463","version":"2021.5.2","si":10}'></script>
+
+</body>
+
+</html>
